@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="activity">
+    <select id="list" resultType="activity">
+        SELECT *
+        FROM demo.Activity
+        ORDER BY id
+    </select>
+    <select id="search" resultType="activity">
+        SELECT *
+        FROM demo.Activity
+        WHERE id = #{id}
+    </select>
+    <select id="fuzzy" parameterType="java.util.Map" resultType="activity">
+        SELECT * FROM demo.Activity
+        <where>
+            <if test="name != null and name != ''">name LIKE "%"#{name}"%"</if>
+        </where>
+    </select>
+    <update id="modify">
+        UPDATE demo.Activity
+        SET
+            name = #{name}
+        WHERE id = #{id}
+    </update>
+    <delete id="remove">
+        DELETE FROM demo.Activity
+        WHERE id = #{id}
+    </delete>
+    <insert id="add" parameterType="Activity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO demo.Activity (
+            name
+        )
+        VALUES (
+            #{name}
+        );
+    </insert>
+</mapper>
