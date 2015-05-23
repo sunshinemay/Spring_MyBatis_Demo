@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="enroll">
+    <select id="list" resultType="enroll">
+        SELECT *
+        FROM demo.Enroll
+        ORDER BY id
+    </select>
+    <select id="search" resultType="enroll">
+        SELECT *
+        FROM demo.Enroll
+        WHERE id = #{id}
+    </select>
+    <select id="fuzzy" parameterType="java.util.Map" resultType="enroll">
+        SELECT * FROM demo.Enroll
+        <where>
+            <if test="sno != null and sno != ''">sno LIKE "%"#{sno}"%"</if>
+            <if test="sname != null and sname != ''">AND sname LIKE "%"#{sname}"%"</if>
+            <if test="activityId != null and activityId != ''">AND activityId LIKE "%"#{activityId}"%"</if>
+        </where>
+    </select>
+    <update id="modify">
+        UPDATE demo.Enroll
+        SET
+            sno = #{sno}, 
+            sname = #{sname}, 
+            activityId = #{activityId}
+        WHERE id = #{id}
+    </update>
+    <delete id="remove">
+        DELETE FROM demo.Enroll
+        WHERE id = #{id}
+    </delete>
+    <insert id="add" parameterType="Enroll" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO demo.Enroll (
+            sno, 
+            sname, 
+            activityId
+        )
+        VALUES (
+            #{sno}, 
+            #{sname}, 
+            #{activityId}
+        );
+    </insert>
+</mapper>
