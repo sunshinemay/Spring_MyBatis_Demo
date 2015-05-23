@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="admin">
+    <select id="list" resultType="admin">
+        SELECT *
+        FROM demo.Admin
+        ORDER BY id
+    </select>
+    <select id="search" resultType="admin">
+        SELECT *
+        FROM demo.Admin
+        WHERE id = #{id}
+    </select>
+    <select id="fuzzy" parameterType="java.util.Map" resultType="admin">
+        SELECT * FROM demo.Admin
+        <where>
+            <if test="username != null and username != ''">username LIKE "%"#{username}"%"</if>
+            <if test="password != null and password != ''">AND password LIKE "%"#{password}"%"</if>
+        </where>
+    </select>
+    <update id="modify">
+        UPDATE demo.Admin
+        SET
+            username = #{username}, 
+            password = #{password}
+        WHERE id = #{id}
+    </update>
+    <delete id="remove">
+        DELETE FROM demo.Admin
+        WHERE id = #{id}
+    </delete>
+    <insert id="add" parameterType="Admin" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO demo.Admin (
+            username, 
+            password
+        )
+        VALUES (
+            #{username}, 
+            #{password}
+        );
+    </insert>
+    <select id="login" parameterType="admin" resultType="admin">
+        SELECT *
+        FROM demo.admin
+        WHERE username = #{username} AND password = #{password}
+    </select>
+</mapper>
