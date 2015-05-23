@@ -69,4 +69,10 @@ public class AdminController extends BaseController {
             return "redirect:/activity/list.jsp";
         }
     }
+
+    @RequestMapping("queryEnrollInfo")
+    private String queryEnrollInfo() {
+        session.setAttribute("activityEnrollList", adminService.queryEnrollInfo());
+        return "redirect:/admin/enrollInfo.jsp";
+    }
 }

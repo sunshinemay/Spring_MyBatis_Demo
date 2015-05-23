@@ -34,5 +34,7 @@
             </tr>
             </c:forEach>
         </table>
+        <hr/>
+        <p><a href="${ctx}/admin/queryEnrollInfo">Query Enroll Info</a></p>
     </body>
 </html>

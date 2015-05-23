@@ -47,4 +47,16 @@
         FROM demo.admin
         WHERE username = #{username} AND password = #{password}
     </select>
+    <resultMap id="enrollInfoMap" type="activity">
+        <result property="name" column="name"/>
+        <collection property="enrolls" ofType="enroll">
+            <result property="sno" column="sno"/>
+            <result property="sname" column="sname"/>
+        </collection>
+    </resultMap>
+    <select id="queryEnrollInfo" resultMap="enrollInfoMap">
+        SELECT e.sno, e.sname, a.name
+        FROM demo.enroll e, demo.activity a
+        WHERE e.activityId = a.id;
+    </select>
 </mapper>
