@@ -12,19 +12,39 @@
     <title></title>
 </head>
 <body>
-${sessionScope.activityEnrollList}
+<hr/>
+<form action="${ctx}/admin/queryEnrollInfoByActivityId" method="post">
+    活动名称：<select name="activityId">
+    <c:forEach var="activity" items="${sessionScope.list}">
+        <c:choose>
+            <c:when test="${activity.id eq sessionScope.activities[0].id}">
+                <option value="${activity.id}" selected="selected"/>
+                ${activity.name}
+            </c:when>
+            <c:otherwise>
+                <option value="${activity.id}"/>
+                ${activity.name}
+            </c:otherwise>
+        </c:choose>
+    </c:forEach>
+</select>
+    <input type="submit" value="查询按钮"/>
+</form>
+<hr/>
 <table border="1">
     <tr>
         <th>STUDENT NO</th>
         <th>STUDENT NAME</th>
         <th>ACTIVITY NAME</th>
     </tr>
-    <c:forEach var="enrollInfo" items="${sessionScope.activityEnrollList}">
-        <tr>
-            <td>${enrollInfo.enrolls[0].sno}</td>
-            <td>${enrollInfo.enrolls[0].sname}</td>
-            <td>${enrollInfo.name}</td>
-        </tr>
+    <c:forEach var="activity" items="${sessionScope.activities}">
+        <c:forEach var="enroll" items="${activity.enrolls}">
+            <tr>
+                <td>${enroll.sno}</td>
+                <td>${enroll.sname}</td>
+                <td>${activity.name}</td>
+            </tr>
+        </c:forEach>
     </c:forEach>
 </table>
 </body>

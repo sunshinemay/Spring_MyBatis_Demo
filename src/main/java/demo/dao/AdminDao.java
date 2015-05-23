@@ -9,4 +9,5 @@ public interface AdminDao extends GenericDao<Admin, Integer> {
     Admin login(Admin admin);
 
     List<Activity> queryEnrollInfo();
+    List<Activity> queryEnrollInfoByActivityId(int activityId);
 }

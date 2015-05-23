@@ -26,4 +26,12 @@ public class AdminDaoImpl extends GenericDaoImpl<Admin, Integer> implements Admi
         sqlSession.close();
         return activities;
     }
+
+    @Override
+    public List<Activity> queryEnrollInfoByActivityId(int activityId) {
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        List<Activity> activities = sqlSession.selectList("admin.queryEnrollInfoByActivityId", activityId);
+        sqlSession.close();
+        return activities;
+    }
 }

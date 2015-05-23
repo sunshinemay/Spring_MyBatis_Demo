@@ -31,4 +31,9 @@ public class AdminServiceImpl extends GenericServiceImpl<Admin, Integer> impleme
     public List<Activity> queryEnrollInfo() {
         return ((AdminDao) genericDao).queryEnrollInfo();
     }
+
+    @Override
+    public List<Activity> queryEnrollInfoByActivityId(int activityId) {
+        return ((AdminDao) genericDao).queryEnrollInfoByActivityId(activityId);
+    }
 }

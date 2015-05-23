@@ -48,6 +48,7 @@
         WHERE username = #{username} AND password = #{password}
     </select>
     <resultMap id="enrollInfoMap" type="activity">
+        <id property="id" column="id"/>
         <result property="name" column="name"/>
         <collection property="enrolls" ofType="enroll">
             <result property="sno" column="sno"/>
@@ -55,8 +56,13 @@
         </collection>
     </resultMap>
     <select id="queryEnrollInfo" resultMap="enrollInfoMap">
-        SELECT e.sno, e.sname, a.name
+        SELECT a.id, e.sno, e.sname, a.name
         FROM demo.enroll e, demo.activity a
         WHERE e.activityId = a.id;
+    </select>
+    <select id="queryEnrollInfoByActivityId" resultMap="enrollInfoMap">
+        SELECT a.id, e.sno, e.sname, a.name
+        FROM demo.enroll e, demo.activity a
+        WHERE e.activityId = a.id AND a.id = #{activityId};
     </select>
 </mapper>

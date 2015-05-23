@@ -35,6 +35,12 @@ public class ActivityController extends BaseController {
         return "redirect:/enroll/add.jsp";
     }
 
+    @RequestMapping("activityEnrollList")
+    private String activityEnrollList() {
+        super.session.setAttribute("list", activityService.list());
+        return "redirect:/admin/enrollInfo.jsp";
+    }
+
     @RequestMapping("search/{id}")
     private String search(@PathVariable("id") Integer id) {
         super.session.setAttribute("activity", activityService.search(id));

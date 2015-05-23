@@ -72,7 +72,14 @@ public class AdminController extends BaseController {
 
     @RequestMapping("queryEnrollInfo")
     private String queryEnrollInfo() {
-        session.setAttribute("activityEnrollList", adminService.queryEnrollInfo());
-        return "redirect:/admin/enrollInfo.jsp";
+        session.setAttribute("activities", adminService.queryEnrollInfo());
+        return "redirect:/activity/activityEnrollList";
+    }
+
+    @RequestMapping("queryEnrollInfoByActivityId")
+    private String queryEnrollInfoByActivityId() {
+        System.out.println(request.getParameter("activityId"));
+        session.setAttribute("activities", adminService.queryEnrollInfoByActivityId(Integer.parseInt(request.getParameter("activityId"))));
+        return "redirect:/activity/activityEnrollList";
     }
 }
