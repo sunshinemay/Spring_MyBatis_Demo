@@ -1,0 +1,17 @@
+DROP DATABASE IF EXISTS demo;
+CREATE DATABASE demo;
+
+DROP TABLE IF EXISTS demo.Admin;
+CREATE TABLE demo.Admin (
+  Id       INT AUTO_INCREMENT PRIMARY KEY,
+  Username VARCHAR(255),
+  Password VARCHAR(255)
+);
+
+DROP TABLE IF EXISTS demo.Message;
+CREATE TABLE demo.Message (
+  Id      INT AUTO_INCREMENT PRIMARY KEY,
+  Name    VARCHAR(255),
+  Content LONGTEXT,
+  Time    DATETIME
+);

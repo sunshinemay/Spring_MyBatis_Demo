@@ -66,7 +66,7 @@ public class AdminController extends BaseController {
             return "admin/login";
         } else {
             session.setAttribute("admin", admin);
-            return "redirect:/index.jsp";
+            return "redirect:/message/list";
         }
     }
 }
