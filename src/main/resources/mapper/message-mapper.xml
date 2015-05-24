@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="message">
+    <select id="list" resultType="message">
+        SELECT *
+        FROM demo.Message
+        ORDER BY id
+    </select>
+    <select id="search" resultType="message">
+        SELECT *
+        FROM demo.Message
+        WHERE id = #{id}
+    </select>
+    <select id="fuzzy" parameterType="java.util.Map" resultType="message">
+        SELECT * FROM demo.Message
+        <where>
+            <if test="name != null and name != ''">name LIKE "%"#{name}"%"</if>
+            <if test="content != null and content != ''">AND content LIKE "%"#{content}"%"</if>
+            <if test="time != null and time != ''">AND time LIKE "%"#{time}"%"</if>
+        </where>
+    </select>
+    <update id="modify">
+        UPDATE demo.Message
+        SET
+            name = #{name}, 
+            content = #{content}, 
+            time = #{time}
+        WHERE id = #{id}
+    </update>
+    <delete id="remove">
+        DELETE FROM demo.Message
+        WHERE id = #{id}
+    </delete>
+    <insert id="add" parameterType="Message" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO demo.Message (
+            name, 
+            content, 
+            time
+        )
+        VALUES (
+            #{name}, 
+            #{content}, 
+            #{time}
+        );
+    </insert>
+</mapper>
